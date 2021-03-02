@@ -1,59 +1,43 @@
 """There is a collection of input strings and a collection of query strings. For each query string, determine how many times it occurs in the list of input strings. Return an array of the results."""
 
+#!/bin/python3
 
-#include <bits/stdc++.h>
+import math
+import os
+import random
+import re
+import sys
 
-using namespace std;
+# Complete the arrayManipulation function below.
+def arrayManipulation(n, queries):
+    arr=[0]*(n+2)
+    for a,b,k in queries:
+        arr[a]+=k
+        arr[b+1]+=-k
+    res=arr[1]
+    temp=0
+    for _ in arr:
+        temp+=_
+        if temp>res:
+            res=temp
+    return res
 
-// Complete the matchingStrings function below.
-vector<int> matchingStrings(vector<string> strings, vector<string> queries) {
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
 
+    nm = input().split()
 
-}
+    n = int(nm[0])
 
-int main()
-{
-    ofstream fout(getenv("OUTPUT_PATH"));
+    m = int(nm[1])
 
-    int strings_count;
-    cin >> strings_count;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    queries = []
 
-    vector<string> strings(strings_count);
+    for _ in range(m):
+        queries.append(list(map(int, input().rstrip().split())))
 
-    for (int i = 0; i < strings_count; i++) {
-        string strings_item;
-        getline(cin, strings_item);
+    result = arrayManipulation(n, queries)
 
-        strings[i] = strings_item;
-    }
+    fptr.write(str(result) + '\n')
 
-    int queries_count;
-    cin >> queries_count;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-    vector<string> queries(queries_count);
-
-    for (int i = 0; i < queries_count; i++) {
-        string queries_item;
-        getline(cin, queries_item);
-
-        queries[i] = queries_item;
-    }
-
-    vector<int> res = matchingStrings(strings, queries);
-
-    for (int i = 0; i < res.size(); i++) {
-        fout << res[i];
-
-        if (i != res.size() - 1) {
-            fout << "\n";
-        }
-    }
-
-    fout << "\n";
-
-    fout.close();
-
-    return 0;
-}
+    fptr.close()
