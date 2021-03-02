@@ -1,0 +1,50 @@
+'''
+The distance between two array values is the number of indices between them. Given , find the minimum distance between any pair of equal elements in the array. If no such value exists, return .
+
+Example
+
+There are two matching pairs of values:  and . The indices of the 's are  and , so their distance is . The indices of the 's are  and , so their distance is . The minimum distance is .
+
+Function Description
+
+Complete the minimumDistances function in the editor below.
+
+minimumDistances has the following parameter(s):
+
+int a[n]: an array of integers
+'''
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the minimumDistances function below.
+def minimumDistances(a):
+    c=len(a)
+    switch=False
+    for x in range(len(a)):
+        for y in range(x+1,len(a)):
+            if a[x]==a[y]:
+                switch=True
+                if y-x<c:
+                    c=y-x
+    if switch==False:
+        c=-1
+    return c
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input())
+
+    a = list(map(int, input().rstrip().split()))
+
+    result = minimumDistances(a)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
