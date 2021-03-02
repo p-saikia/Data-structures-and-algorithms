@@ -1,0 +1,71 @@
+'''
+A driver is driving on the freeway. The check engine light of his vehicle is on, and the driver wants to get service immediately. Luckily, a service lane runs parallel to the highway. It varies in width along its length.
+
+Paradise Highway
+
+You will be given an array of widths at points along the road (indices), then a list of the indices of entry and exit points. Considering each entry and exit point pair, calculate the maximum size vehicle that can travel that segment of the service lane safely.
+
+Example
+
+
+
+If the entry index,  and the exit, , there are two segment widths of  and  respectively. The widest vehicle that can fit through both is . If  and , the widths are  which limits vehicle width to .
+
+Function Description
+
+Complete the serviceLane function in the editor below.
+
+serviceLane has the following parameter(s):
+
+int n: the size of the  array
+int cases[t][2]: each element contains the starting and ending indices for a segment to consider, inclusive
+Returns
+
+int[t]: the maximum width vehicle that can pass through each segment of the service lane described
+'''
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the serviceLane function below.
+def serviceLane(n, cases):
+    res=[]
+    for pair in cases:
+        res.append(min(width[pair[0]:pair[1]+1:]))
+    return res
+
+
+
+
+
+
+
+
+    # return [min(width[x:y+1]) for x,y in cases]
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    nt = input().split()
+
+    n = int(nt[0])
+
+    t = int(nt[1])
+
+    width = list(map(int, input().rstrip().split()))
+
+    cases = []
+
+    for _ in range(t):
+        cases.append(list(map(int, input().rstrip().split())))
+
+    result = serviceLane(n, cases)
+
+    fptr.write('\n'.join(map(str, result)))
+    fptr.write('\n')
+
+    fptr.close()
