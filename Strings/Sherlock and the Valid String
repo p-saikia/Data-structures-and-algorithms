@@ -1,0 +1,68 @@
+'''
+Sherlock considers a string to be valid if all characters of the string appear the same number of times. It is also valid if he can remove just  character at  index in the string, and the remaining characters will occur the same number of times. Given a string , determine if it is valid. If so, return YES, otherwise return NO.
+
+Example
+
+This is a valid string because frequencies are .
+
+
+This is a valid string because we can remove one  and have  of each character in the remaining string.
+
+
+This string is not valid as we can only remove  occurrence of . That leaves character frequencies of .
+
+Function Description
+
+Complete the isValid function in the editor below.
+
+isValid has the following parameter(s):
+
+string s: a string
+Returns
+
+string: either YES or NO
+'''
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the isValid function below.
+def isValid(s):
+    mydict={}
+#     print(set(s))
+    for x in set(s):
+#         print(x,s.count(x))
+        if s.count(x) in mydict.keys():
+            mydict[s.count(x)]+=1
+        else:
+            mydict[s.count(x)]=1
+#     print(mydict)
+    keys=list(mydict.keys())
+    val=list(mydict.values())
+    if len(keys)>2:
+        return 'NO'
+    elif len(keys)==2:
+        if (val[1]==1 or val[0]==1) and abs(keys[1]-keys[0])==1:
+            return 'YES'
+        elif (val[1]==1 and keys[1]==1) or (keys[0]==1 and val[0]==1):
+            return 'YES'
+        else:
+            return 'NO'
+    elif len(keys)==1:
+        return 'YES'
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    s = input()
+
+    result = isValid(s)
+
+    fptr.write(result + '\n')
+
+    fptr.close()
