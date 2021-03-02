@@ -1,5 +1,4 @@
 """There is a collection of input strings and a collection of query strings. For each query string, determine how many times it occurs in the list of input strings. Return an array of the results."""
-
 #!/bin/python3
 
 import math
@@ -8,36 +7,34 @@ import random
 import re
 import sys
 
-# Complete the arrayManipulation function below.
-def arrayManipulation(n, queries):
-    arr=[0]*(n+2)
-    for a,b,k in queries:
-        arr[a]+=k
-        arr[b+1]+=-k
-    res=arr[1]
-    temp=0
-    for _ in arr:
-        temp+=_
-        if temp>res:
-            res=temp
-    return res
+# Complete the matchingStrings function below.
+def matchingStrings(strings, queries):
+    for i in range(len(queries)):
+        queries[i]=strings.count(queries[i])
+    return queries
 
 if __name__ == '__main__':
     fptr = open(os.environ['OUTPUT_PATH'], 'w')
 
-    nm = input().split()
+    strings_count = int(input())
 
-    n = int(nm[0])
+    strings = []
 
-    m = int(nm[1])
+    for _ in range(strings_count):
+        strings_item = input()
+        strings.append(strings_item)
+
+    queries_count = int(input())
 
     queries = []
 
-    for _ in range(m):
-        queries.append(list(map(int, input().rstrip().split())))
+    for _ in range(queries_count):
+        queries_item = input()
+        queries.append(queries_item)
 
-    result = arrayManipulation(n, queries)
+    res = matchingStrings(strings, queries)
 
-    fptr.write(str(result) + '\n')
+    fptr.write('\n'.join(map(str, res)))
+    fptr.write('\n')
 
     fptr.close()
