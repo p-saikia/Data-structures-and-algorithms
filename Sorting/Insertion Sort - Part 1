@@ -1,0 +1,49 @@
+'''
+Insert element into sorted list
+Given a sorted list with an unsorted number  in the rightmost cell, can you write some simple code to insert  into the array so that it remains sorted?
+
+Since this is a learning exercise, it won't be the most efficient way of performing the insertion. It will instead demonstrate the brute-force method in detail.
+
+Assume you are given the array  indexed . Store the value of . Now test lower index values successively from  to  until you reach a value that is lower than , at  in this case. Each time your test fails, copy the value at the lower index to the current index and print your array. When the next lower indexed value is smaller than , insert the stored value at the current index and print the entire array.
+'''
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the insertionSort1 function below.
+def insertionSort1(n, arr):
+    def printArr(arr):
+        y=''
+        for x in arr:
+            y+=str(x)+' '
+        print(y)
+    for i in range(len(arr)-1,-1,-1):
+        temp=arr[-1]
+        issorted=1
+        for j in range(len(arr)-1,-1,-1):
+#             print(i,j,arr[i],arr[j],arr[j-1])
+            if arr[j-1]>=temp and j!=0:
+                arr[j]=arr[j-1]
+                issorted=0
+                printArr(arr)
+            else:
+                arr[j]=temp
+                if issorted==0:
+                    printArr(arr)
+                break
+        if issorted==1:
+            break
+    
+
+if __name__ == '__main__':
+    n = int(input())
+
+    arr = list(map(int, input().rstrip().split()))
+
+    insertionSort1(n, arr)
+
