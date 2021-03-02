@@ -1,0 +1,63 @@
+'''
+Given the time in numerals we may convert it into words, as shown below:
+
+At , use o' clock. For , use past, and for  use to. Note the space between the apostrophe and clock in o' clock. Write a program which prints the time in words for the input given in the format described.
+
+Function Description
+
+Complete the timeInWords function in the editor below.
+
+timeInWords has the following parameter(s):
+
+int h: the hour of the day
+int m: the minutes after the hour
+'''
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the timeInWords function below.
+def timeInWords(h, m):
+    if h==12:
+        a=1
+    else:
+        a=h+1
+    if m<=30:
+        b=m
+    else:
+        b=60-m
+    mydict={1:'one',2:'two',3:'three',4:'four',5:'five',6:'six',7:'seven',8:'eight',9:'nine',10:'ten',11:'eleven',12:'twelve',13:'thirteen',14:'fourteen',15:'fifteen',16:'sixteen',17:'seventeen',18:'eighteen',19:'nineteen',20:'twenty',21:'twenty one',22:'twenty two',23:'twenty three',24:'twenty four',25:'twenty five',26:'twenty six',27:'twenty seven',28:'twenty eight',29:'twenty nine'}
+    if m==0:
+        return mydict[h]+" o' clock"
+    elif m==1:
+        return mydict[m]+" minute past "+mydict[h]
+    elif 2<=m<=14 or 16<=m<=29:
+        return mydict[m]+" minutes past "+mydict[h]
+    elif m==15:
+        return "quarter past "+mydict[h]
+    elif m==30:
+        return "half past "+mydict[h]
+    elif 31<=m<=44 or 46<=m<=58:
+        return mydict[b]+" minutes to "+mydict[a]
+    elif m==45:
+        return "quarter to "+mydict[a]
+    elif m==59:
+        return mydict[b]+" minute to "+mydict[a]
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    h = int(input())
+
+    m = int(input())
+
+    result = timeInWords(h, m)
+
+    fptr.write(result + '\n')
+
+    fptr.close()
