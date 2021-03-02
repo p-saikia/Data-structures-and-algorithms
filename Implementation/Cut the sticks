@@ -1,0 +1,66 @@
+'''
+You are given a number of sticks of varying lengths. You will iteratively cut the sticks into smaller sticks, discarding the shortest pieces until there are none left. At each iteration you will determine the length of the shortest stick remaining, cut that length from each of the longer sticks and then discard all the pieces of that shortest length. When all the remaining sticks are the same length, they cannot be shortened so discard them.
+
+Given the lengths of  sticks, print the number of sticks that are left before each iteration until there are none left.
+
+Example
+
+The shortest stick length is , so cut that length from the longer two and discard the pieces of length . Now the lengths are . Again, the shortest stick is of length , so cut that amount from the longer stick and discard those pieces. There is only one stick left, , so discard that stick. The number of sticks at each iteration are .
+
+Function Description
+
+Complete the cutTheSticks function in the editor below. It should return an array of integers representing the number of sticks before each cut operation is performed.
+
+cutTheSticks has the following parameter(s):
+
+int arr[n]: the lengths of each stick
+Returns
+
+int[]: the number of sticks after each iteration
+'''
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the cutTheSticks function below.
+def cutTheSticks(arr):
+    #LIST OF LENGTHS
+    l_s=[]
+    while arr!=[]:
+        arr.sort()
+#        print('\tarr=',arr)
+        l=len(arr)
+#        print('l=',l)
+        l_s.append(l)
+#        print('l_s=',l_s)
+        min_l=arr[0]
+#        print('min_l=',min_l)
+        for x in range(len(arr)):
+            arr[x]-=min_l
+        temp=[]
+        for x in arr:
+            if x>0:
+                temp.append(x)
+#        print(temp)
+        arr=temp
+#    print('\n\nl_s=',l_s)
+    return l_s
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input())
+
+    arr = list(map(int, input().rstrip().split()))
+
+    result = cutTheSticks(arr)
+
+    fptr.write('\n'.join(map(str, result)))
+    fptr.write('\n')
+
+    fptr.close()
