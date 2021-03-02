@@ -12,38 +12,35 @@ a b c
   d
 e f g
 There are  hourglasses in . An hourglass sum is the sum of an hourglass' values. Calculate the hourglass sum for every hourglass in , then print the maximum hourglass sum. The array will always be .'''
+#!/bin/python3
 
+import math
+import os
+import random
+import re
+import sys
 
-#include <bits/stdc++.h>
+# Complete the hourglassSum function below.
+def hourglassSum(arr):
+    def sumHourglass(arr,i,j):
+        return arr[i][j]+arr[i][j+1]+arr[i][j+2]+arr[i+1][j+1]+arr[i+2][j]+arr[i+2][j+1]+arr[i+2][j+2]
+    res=sumHourglass(arr,0,0)
+    for i in range(len(arr)-2):
+        for j in range(len(arr)-2):
+            if sumHourglass(arr,i,j)>res:
+                res=sumHourglass(arr,i,j)
+    return res
 
-using namespace std;
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
 
-// Complete the hourglassSum function below.
-int hourglassSum(vector<vector<int>> arr) {
+    arr = []
 
+    for _ in range(6):
+        arr.append(list(map(int, input().rstrip().split())))
 
-}
+    result = hourglassSum(arr)
 
-int main()
-{
-    ofstream fout(getenv("OUTPUT_PATH"));
+    fptr.write(str(result) + '\n')
 
-    vector<vector<int>> arr(6);
-    for (int i = 0; i < 6; i++) {
-        arr[i].resize(6);
-
-        for (int j = 0; j < 6; j++) {
-            cin >> arr[i][j];
-        }
-
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    }
-
-    int result = hourglassSum(arr);
-
-    fout << result << "\n";
-
-    fout.close();
-
-    return 0;
-}
+    fptr.close()
