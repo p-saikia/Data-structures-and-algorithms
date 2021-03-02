@@ -1,0 +1,65 @@
+'''
+A weighted string is a string of lowercase English letters where each letter has a weight. Character weights are  to  from  to  as shown below:
+
+image
+
+The weight of a string is the sum of the weights of its characters. For example:
+
+image
+
+A uniform string consists of a single character repeated zero or more times. For example, ccc and a are uniform strings, but bcb and cd are not.
+Given a string, , let  be the set of weights for all possible uniform contiguous substrings of string . There will be  queries to answer where each query consists of a single integer. Create a return array where for each query, the value is Yes if . Otherwise, append No.
+
+Note: The  symbol denotes that  is an element of set .
+'''
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the weightedUniformStrings function below.
+def weightedUniformStrings(s, queries):
+    mydict={'a': 1, 'c': 3, 'b': 2, 'e': 5, 'd': 4, 'g': 7, 'f': 6, 'i': 9, 'h': 8, 'k': 11, 'j': 10, 'm': 13, 'l': 12, 'o': 15, 'n': 14, 'q': 17, 'p': 16, 's': 19, 'r': 18, 'u': 21, 't': 20, 'w': 23, 'v': 22, 'y': 25, 'x': 24, 'z': 26}
+    y=''
+    yv=0
+    weights=set()
+    for x in s:
+        weights.add(mydict[x])
+        if x in y:
+            y+=x
+            yv+=mydict[x]
+            weights.add(yv)
+        else:
+            y=x
+            yv=mydict[x]
+    mylist=[]
+    for x in queries:
+        if x in weights:
+            mylist.append('Yes')
+        else:
+            mylist.append('No')
+    return mylist
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    s = input()
+
+    queries_count = int(input())
+
+    queries = []
+
+    for _ in range(queries_count):
+        queries_item = int(input())
+        queries.append(queries_item)
+
+    result = weightedUniformStrings(s, queries)
+
+    fptr.write('\n'.join(result))
+    fptr.write('\n')
+
+    fptr.close()
