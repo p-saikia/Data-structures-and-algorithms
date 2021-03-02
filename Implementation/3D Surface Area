@@ -1,0 +1,78 @@
+'''
+Madison, is a little girl who is fond of toys. Her friend Mason works in a toy manufacturing factory . Mason has a 2D board  of size  with  rows and  columns. The board is divided into cells of size  with each cell indicated by it's coordinate . The cell  has an integer  written on it. To create the toy Mason stacks  number of cubes of size  on the cell .
+
+Given the description of the board showing the values of  and that the price of the toy is equal to the 3d surface area find the price of the toy.
+
+image
+
+Input Format
+
+The first line contains two space-separated integers  and  the height and the width of the board respectively.
+
+The next  lines contains  space separated integers. The  integer in  line denotes .
+'''
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the surfaceArea function below.
+def surfaceArea(A):
+    #SIZE OF GRID
+    n=len(A)
+    m=len(A[0])
+    # fN TO CHECK IF CELL INSIDE GRID
+    def inBound(i,j,n,m):
+        if 0<=i<n and 0<=j<m:
+            return True
+        else:
+            return False
+    # fN TO RETURN INDIVISUAL EXTRUDED HT
+    def area(i,j,n,m,A):
+        u=0;d=0;l=0;r=0
+        if inBound(i-1,j,n,m)==True:
+            u=max(A[i][j]-A[i-1][j],0)
+        if  inBound(i+1,j,n,m)==True:
+            d=max(A[i][j]-A[i+1][j],0)
+        if  inBound(i,j-1,n,m)==True:
+            l=max(A[i][j]-A[i][j-1],0)
+        if  inBound(i,j+1,n,m)==True:
+            r=max(A[i][j]-A[i][j+1],0)
+        return u+d+l+r
+    # A. CALCULATION OF TOTAL EXTRUDED HT USING LOOPS
+    area_ext=0
+    for i in range(n):
+        for j in range(m):
+            area_ext+=area(i,j,n,m,A)
+    # B. CALCULATION OF SIDE HIEGHTS
+    area_side=0
+    for i in range(n):
+        area_side+=A[i][0]+A[i][m-1]
+    area_side+=sum(A[0])+sum(A[n-1])
+    # SUM = UPPER SURFACE + LOWER SURFACE + A + B
+    return 2*n*m+area_ext+area_side
+    
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    HW = input().split()
+
+    H = int(HW[0])
+
+    W = int(HW[1])
+
+    A = []
+
+    for _ in range(H):
+        A.append(list(map(int, input().rstrip().split())))
+
+    result = surfaceArea(A)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
