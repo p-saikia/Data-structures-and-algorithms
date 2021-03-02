@@ -10,51 +10,14 @@ import random
 import re
 import sys
 
-# Complete the encryption function below.
-def encryption(s):
-    root=len(s)**0.5
-    if root%1==0:
-        r=int(root)
-        c=int(root)
-    else:
-        r=int(root)
-        c=int(root+1)
-    if r*c<len(s):
-#         print('yes')
-        if (r+1)*c<=(c+1)*r:
-            c+=1
-#             print('c=',c)
-        elif (r+1)*c>(c+1)*r:
-            r+=1
-#             print('r=',r)
-#     print(r,c)
-    res=''
-    for i in range(len(s)%c):
-        for j in range(r):
-            res+=s[i+c*j]
-#             print(res)
-        res+=' '
-        
-    if len(s)%c==0:
-        x=r
-    else:
-        x=r-1
-    for i in range(len(s)%c,c):
-        for j in range(x):
-            res+=s[i+c*j]
-#             print(res)
-        res+=' '
-            
-            
-    return res
+# Complete the extraLongFactorials function below.
+def extraLongFactorials(n):
+    y=1
+    for x in range(1,n+1):
+        y=y*x
+    print(y)
 
 if __name__ == '__main__':
-    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+    n = int(input())
 
-    s = input()
-
-    result = encryption(s)
-
-    fptr.write(result + '\n')
-
-    fptr.close()
+    extraLongFactorials(n)
