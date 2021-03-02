@@ -1,0 +1,61 @@
+'''
+You are the benevolent ruler of Rankhacker Castle, and today you're distributing bread. Your subjects are in a line, and some of them already have some loaves. Times are hard and your castle's food stocks are dwindling, so you must distribute as few loaves as possible according to the following rules:
+
+Every time you give a loaf of bread to some person , you must also give a loaf of bread to the person immediately in front of or behind them in the line (i.e., persons  or ).
+After all the bread is distributed, each person must have an even number of loaves.
+Given the number of loaves already held by each citizen, find and print the minimum number of loaves you must distribute to satisfy the two rules above. If this is not possible, print NO.
+
+For example, the people in line have loaves . We can first give a loaf to  and  so . Next we give a loaf to  and  and have  which satisfies our conditions. We had to distribute  loaves.
+
+Function Description
+
+Complete the fairRations function in the editor below. It should return an integer that represents the minimum number of loaves required.
+
+fairRations has the following parameter(s):
+
+B: an array of integers that represent the number of loaves each persons starts with .
+'''
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the fairRations function below.
+def fairRations(B):
+    for x in range(len(B)):
+        B[x]=B[x]%2
+#         print(B)
+    if B.count(1)%2!=0:
+        c='NO'
+    else:
+        c=0
+        while B!=[]:
+            x=B.pop()
+            if x==0:
+                pass
+            elif x==1:
+                y=B.pop()
+                c+=2
+#                 print(f'outx={x}\ty={y}\tB={B}\tc={c}')
+                while y!=1:
+                    c+=2
+                    y=B.pop()
+#                     print(f'inx={x}\ty={y}\tB={B}\tc={c}')
+    return c
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    N = int(input())
+
+    B = list(map(int, input().rstrip().split()))
+
+    result = fairRations(B)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
