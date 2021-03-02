@@ -1,0 +1,42 @@
+'''
+You are given a string containing characters  and  only. Your task is to change it into a string such that there are no matching adjacent characters. To do this, you are allowed to delete zero or more characters in the string.
+
+Your task is to find the minimum number of required deletions.
+'''
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the alternatingCharacters function below.
+def alternatingCharacters(s):
+    switch=s[0]
+    d=0
+    for x in s[1::]:
+        if x=='A' and switch=='A':
+            d+=1
+        elif x=='B' and switch=='B':
+            d+=1
+        elif x=='A' and switch=='B':
+            switch='A'
+        elif x=='B'and switch=='A':
+            switch='B'
+    return d
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    q = int(input())
+
+    for q_itr in range(q):
+        s = input()
+
+        result = alternatingCharacters(s)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()
